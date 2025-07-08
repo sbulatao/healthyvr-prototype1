@@ -68,10 +68,12 @@ void loop(){
     
     ///////////////////////////////////////////////////////////////////////////////
     // EXTRACTING DATA 
+    // from Vantage V3
     int spO = jsonDoc["spO"]; // Oxygen Saturation 
     int ecg = jsonDoc["ecg"]; // Electrical Activity of the Heart
-    int heart_rate = jsonDoc["heart_rate"]; // BPM
     int skin_temp = jsonDoc["skin_temperature"]; // Skin Temperature
+    // from H10
+    int heart_rate = jsonDoc["heart_rate"]; // BPM
     
     // output
 

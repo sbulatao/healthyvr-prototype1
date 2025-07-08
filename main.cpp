@@ -1,24 +1,30 @@
-// For the ESP32 to flash to get data to/from Polar V3 and H10
+// For the ESP32 to flash to get data from Polar V3 and H10
 #include <BLEDevice.h> // BLE w/ Polar V3 and H10
 #include <Time.h> // Timekeeping functionality
 
 // Zephyr
+#include <errno.h>
 #include <stdio.h>
+#include <stddef.h>
+#include <string.h>
+#include <zephyr/types.h>
 #include <zephyr/kernel.h>
-#include <zephyr/arch/cpu.h>
 #include <zephyr/sys/printk.h>
+#include <zephyr/sys/byteorder.h>
+#include <zephyr/bluetooth/bluetooth.h>
+#include <zephyr/bluetooth/conn.h>
+#include <zephyr/bluetooth/classic/hfp_hf.h>
+#include <zephyr/settings/settings.h>
 
-// Communication to ESP32 C3 (HealthyPi 5)
+// Communications to ESP32 C3 (HealthyPi 5)
 #include <Arduino.h>
 #include <ArduinoJson.h>
 #include <BluetoothSerial.h>
-
-///////////////////////////////////////////////////////////////////////////////
-// 
-///////////////////////////////////////////////////////////////////////////////
-
 // #include <ESP32Time> // set and retrieve internal RTC time on ESP32 boards
-// NEED more research
+
+///////////////////////////////////////////////////////////////////////////////
+//               
+///////////////////////////////////////////////////////////////////////////////
 
 // Find BLE devices such as V3 and H10
 
@@ -40,7 +46,7 @@
 BluetoothSerial SerialPolar; // Bluetooth communication
 
 void setup(){
-  Serial.beign(115200); // 115200 baud rate
+  Serial.begin(115200); // 115200 baud rate
   pinMode(BUILTIN_LED, OUTPUT);
   SerialPolar.begin("ESP32_Slave_Polar");
   Serial.println("ESP32 Slave Polar Bluetooth Started. Waiting for Master HealthyPi 5 to connect...");

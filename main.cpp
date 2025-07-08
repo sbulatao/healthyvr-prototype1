@@ -2,6 +2,12 @@
 #include <BLEDevice.h> // BLE w/ Polar V3 and H10
 #include <Time.h> // Timekeeping functionality
 
+// Zephyr
+#include <stdio.h>
+#include <zephyr/kernel.h>
+#include <zephyr/arch/cpu.h>
+#include <zephyr/sys/printk.h>
+
 // Communication to ESP32 C3 (HealthyPi 5)
 #include <Arduino.h>
 #include <ArduinoJson.h>

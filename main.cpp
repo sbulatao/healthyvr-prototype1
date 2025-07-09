@@ -9,12 +9,21 @@
 #include <string.h>
 #include <zephyr/types.h>
 #include <zephyr/kernel.h>
+#include <zephyr/logging/log.h>
+#include <zephyr/drivers/gpio.h>
 #include <zephyr/sys/printk.h>
 #include <zephyr/sys/byteorder.h>
-#include <zephyr/bluetooth/bluetooth.h>
+#include <zephyr/bluetooth/hci.h>
 #include <zephyr/bluetooth/conn.h>
-#include <zephyr/bluetooth/classic/hfp_hf.h>
-#include <zephyr/settings/settings.h>
+#include <zephyr/bluetooth/uuid.h>
+#include <zephyr/bluetooth/gatt.h>
+#include <zephyr/bluetooth/bluetooth.h>
+// #include <zephyr/bluetooth/classic/hfp_hf.h>
+// #include <zephyr/settings/settings.h>
+
+// https://github.com/zephyrproject-rtos/zephyr/blob/main/samples/bluetooth/st_ble_sensor/src/main.c 
+#include "button_svc.h"
+#include "led_svc.h"
 
 // Communications to ESP32 C3 (HealthyPi 5)
 #include <Arduino.h>
